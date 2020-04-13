@@ -6,6 +6,7 @@ import com.orbund.galactic.be.common.entities.repository.SampleRepository;
 import com.orbund.galactic.be.common.sample.mapper.SampleMapper;
 import com.orbund.galactic.be.common.sample.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -39,7 +40,14 @@ public class SampleServiceImpl implements SampleService<SampleDto> {
     }
 
     @Override
-    public Optional<SampleDto> persist(SampleDto dto) {
+    public Optional<SampleDto> persist(SampleDto sampleDto) {
+        Sample newSample = sampleMapper.sampleDtoToSample(sampleDto);
+        try{
+            Sample savedSample = sampleRepository.save(newSample);
+            if (savedSample != null) return Optional.of(sampleMapper.sampleToSampleDto(savedSample));
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 

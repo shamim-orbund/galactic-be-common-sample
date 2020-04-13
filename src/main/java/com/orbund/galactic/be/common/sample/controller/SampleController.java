@@ -3,13 +3,13 @@ package com.orbund.galactic.be.common.sample.controller;
 import com.orbund.galactic.be.common.entities.dto.SampleDto;
 import com.orbund.galactic.be.common.sample.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/samples")
@@ -30,5 +30,11 @@ public class SampleController {
         return ResponseEntity.ok(sampleDtos);
     }
 
+    @PostMapping
+    public ResponseEntity<SampleDto> addSample(@RequestBody SampleDto sampleDto) {
+        Optional<SampleDto> sampleDtoOptional = sampleService.persist(sampleDto);
+        if (sampleDtoOptional.isPresent()) return ResponseEntity.status(HttpStatus.CREATED).body(sampleDtoOptional.get());
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 
 }
