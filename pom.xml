@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.orbund</groupId>
 			<artifactId>galactic-be-common-entities</artifactId>
-			<version>0.0.7</version>
+			<version>0.0.8</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,7 +73,7 @@
 						<dependency>
 							<groupId>com.orbund</groupId>
 							<artifactId>galactic-be-common-entities</artifactId>
-							<version>0.0.7</version>
+							<version>0.0.8</version>
 						</dependency>
 					</requiresUnpack>
 				</configuration>
