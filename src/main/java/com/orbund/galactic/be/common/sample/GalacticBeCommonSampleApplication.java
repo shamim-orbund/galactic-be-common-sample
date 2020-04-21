@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import(GalacticBeCommonEntitiesApplication.class)
 public class GalacticBeCommonSampleApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(GalacticBeCommonSampleApplication.class, args);
-    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(GalacticBeCommonSampleApplication.class, args);
+	}
+
 }
