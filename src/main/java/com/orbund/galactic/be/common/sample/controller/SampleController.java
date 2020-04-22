@@ -1,6 +1,8 @@
 package com.orbund.galactic.be.common.sample.controller;
 
 import com.orbund.galactic.be.common.entities.dto.SampleDto;
+import com.orbund.galactic.be.common.sample.api.ApiConstants;
+import com.orbund.galactic.be.common.sample.api.ApiProvider;
 import com.orbund.galactic.be.common.sample.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/samples")
+@RequestMapping(ApiProvider.SampleApi.ROOT_PATH)
 @SuppressWarnings("unchecked")
 public class SampleController {
 
@@ -34,6 +36,20 @@ public class SampleController {
     public ResponseEntity<SampleDto> addSample(@RequestBody SampleDto sampleDto) {
         Optional<SampleDto> sampleDtoOptional = sampleService.persist(sampleDto);
         if (sampleDtoOptional.isPresent()) return ResponseEntity.status(HttpStatus.CREATED).body(sampleDtoOptional.get());
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @PutMapping(ApiProvider.SampleApi.SAMPLE_IDENTIFIER)
+    public ResponseEntity<SampleDto> updateSample(@PathVariable(name = ApiConstants.SAMPLE_ID) long sampleId, SampleDto sampleDto) {
+        Optional<SampleDto> sampleDtoOptional = sampleService.update(sampleId, sampleDto);
+        if (sampleDtoOptional.isPresent()) return ResponseEntity.status(HttpStatus.ACCEPTED).body(sampleDtoOptional.get());
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @DeleteMapping(ApiProvider.SampleApi.SAMPLE_IDENTIFIER)
+    public ResponseEntity<String> deleteSample(@PathVariable(name = ApiConstants.SAMPLE_ID) long sampleId) {
+        boolean isDeleted = sampleService.remove(sampleId);
+        if (isDeleted) return ResponseEntity.ok().build();
         else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
