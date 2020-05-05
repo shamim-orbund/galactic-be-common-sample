@@ -7,4 +7,8 @@ public abstract class ApiProvider {
         public static final String SAMPLE_IDENTIFIER = "/" + "{" + ApiConstants.SAMPLE_ID + "}";
     }
 
+    public static class ApplicationSectionApi {
+        public static final String ROOT_PATH = ApiConstants.BASE_PATH + "/" + ApiConstants.APPLICATION_SECTIONS;
+    }
+
 }
