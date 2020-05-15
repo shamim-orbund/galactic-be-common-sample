@@ -20,7 +20,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<common.entity.version>0.0.12</common.entity.version>
+		<common.entity.version>0.0.16</common.entity.version>
 		<mapstruct.version>1.3.1.Final</mapstruct.version>
 		<springfox.swagger.version>2.9.2</springfox.swagger.version>
 		<springfox.swagger.ui.version>2.9.2</springfox.swagger.ui.version>
@@ -91,6 +91,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
